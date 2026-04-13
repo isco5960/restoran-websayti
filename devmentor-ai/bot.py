@@ -12,9 +12,6 @@ MENTOR_MODE = "mentor"
 
 user_modes = {}
 
-if not TELEGRAM_BOT_TOKEN:
-    raise ValueError("TELEGRAM_BOT_TOKEN topilmadi. .env ga token kiriting.")
-
 bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN, parse_mode="HTML")
 
 
@@ -82,9 +79,15 @@ def text_handler(message: types.Message) -> None:
 
 if __name__ == "__main__":
     print("DevMentor AI bot ishga tushdi...")
+    if not TELEGRAM_BOT_TOKEN:
+      print("TELEGRAM_BOT_TOKEN topilmadi. .env yoki Render env variable tekshiring.")
+      raise SystemExit(1)
     bot.infinity_polling(skip_pending=True)
 
 
 def run_bot() -> None:
     print("DevMentor AI bot polling boshlandi...")
+    if not TELEGRAM_BOT_TOKEN:
+        print("TELEGRAM_BOT_TOKEN topilmadi. Bot ishga tushmadi.")
+        return
     bot.infinity_polling(skip_pending=True)
