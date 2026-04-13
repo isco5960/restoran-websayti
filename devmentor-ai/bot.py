@@ -83,3 +83,8 @@ def text_handler(message: types.Message) -> None:
 if __name__ == "__main__":
     print("DevMentor AI bot ishga tushdi...")
     bot.infinity_polling(skip_pending=True)
+
+
+def run_bot() -> None:
+    print("DevMentor AI bot polling boshlandi...")
+    bot.infinity_polling(skip_pending=True)

@@ -24,7 +24,7 @@ Telegram AI Coding Mentor bot.
 5. Run:
    `python bot.py`
 
-## 24/7 Online (Render)
+## 24/7 Online (Render - Free plan)
 1. Push `devmentor-ai` folder to GitHub.
 2. Render dashboard -> New -> Blueprint.
 3. Select repo and set Blueprint Path:
@@ -35,4 +35,4 @@ Telegram AI Coding Mentor bot.
    - `CLAUDE_MODEL` (optional)
 5. Deploy. Bot 24/7 ishlaydi.
 
-Eslatma: free plan'da ba'zan cheklov bo'lishi mumkin. Muhim bot uchun paid worker tavsiya etiladi.
+Eslatma: free plan worker bermasa, bu loyiha web service sifatida ishlaydi (health endpoint + background polling).
