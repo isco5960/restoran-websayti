@@ -3,6 +3,7 @@ services:
     name: devmentor-ai-bot
     env: python
     plan: free
+    rootDir: devmentor-ai
     buildCommand: pip install -r requirements.txt
     startCommand: python web_runner.py
     autoDeploy: true
