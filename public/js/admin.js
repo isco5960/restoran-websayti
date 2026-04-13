@@ -12,26 +12,37 @@ function setText(id, text) {
   if (el) el.textContent = text;
 }
 
+async function requestJSON(url, options = {}) {
+  const res = await fetch(url, options);
+  const raw = await res.text();
+  let data;
+  try {
+    data = raw ? JSON.parse(raw) : {};
+  } catch (_e) {
+    throw new Error(`Server JSON qaytarmadi: ${raw.slice(0, 120)}`);
+  }
+  if (!res.ok) throw new Error(data.message || "Server xatoligi.");
+  return data;
+}
+
 async function adminLogin() {
   const phone = document.getElementById("adminPhone").value.trim();
   const password = document.getElementById("adminPassword").value.trim();
   setText("adminLoginMsg", "Kirilmoqda...");
 
   try {
-    const res = await fetch("/login", {
+    const data = await requestJSON("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone, password })
     });
-    const data = await res.json();
-    if (!res.ok || !data.token) throw new Error(data.message || "Login xato.");
+    if (!data.token) throw new Error("Login xato.");
 
     adminToken = data.token;
     localStorage.setItem("adminToken", adminToken);
 
-    const profileRes = await fetch("/profile", { headers: { Authorization: `Bearer ${adminToken}` } });
-    const profile = await profileRes.json();
-    if (!profileRes.ok || profile.role !== "admin") throw new Error("Bu akkaunt admin emas.");
+    const profile = await requestJSON("/profile", { headers: { Authorization: `Bearer ${adminToken}` } });
+    if (profile.role !== "admin") throw new Error("Bu akkaunt admin emas.");
 
     document.getElementById("adminLoginCard").style.display = "none";
     document.getElementById("adminApp").style.display = "block";
@@ -55,32 +66,29 @@ async function addMenuItem() {
     return;
   }
 
-  const res = await fetch("/menu", {
-    method: "POST",
-    headers: authHeaders(),
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    setText("menuMsg", data.message || "Menu qo'shilmadi.");
-    return;
+  try {
+    await requestJSON("/menu", {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify(payload)
+    });
+    setText("menuMsg", "Menu muvaffaqiyatli qo'shildi.");
+    await loadMenuList();
+  } catch (err) {
+    setText("menuMsg", err.message || "Menu qo'shilmadi.");
   }
-
-  setText("menuMsg", "Menu muvaffaqiyatli qo'shildi.");
-  await loadMenuList();
 }
 
 async function deleteMenuItem(id) {
-  const res = await fetch(`/menu/${id}`, {
-    method: "DELETE",
-    headers: authHeaders()
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    alert(data.message || "O'chirib bo'lmadi.");
-    return;
+  try {
+    await requestJSON(`/menu/${id}`, {
+      method: "DELETE",
+      headers: authHeaders()
+    });
+    await loadMenuList();
+  } catch (err) {
+    alert(err.message || "O'chirib bo'lmadi.");
   }
-  await loadMenuList();
 }
 
 async function updateMenuPrice(id) {
@@ -91,36 +99,33 @@ async function updateMenuPrice(id) {
     return;
   }
 
-  const res = await fetch(`/menu/${id}`, {
-    method: "PUT",
-    headers: authHeaders(),
-    body: JSON.stringify({ price: newPrice })
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    alert(data.message || "Narx yangilanmadi.");
-    return;
+  try {
+    await requestJSON(`/menu/${id}`, {
+      method: "PUT",
+      headers: authHeaders(),
+      body: JSON.stringify({ price: newPrice })
+    });
+    await loadMenuList();
+  } catch (err) {
+    alert(err.message || "Narx yangilanmadi.");
   }
-  await loadMenuList();
 }
 
 async function updateOrderStatus(orderId, status) {
-  const res = await fetch(`/order/status/${orderId}`, {
-    method: "PUT",
-    headers: authHeaders(),
-    body: JSON.stringify({ status })
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    alert(data.message || "Status yangilanmadi.");
-    return;
+  try {
+    await requestJSON(`/order/status/${orderId}`, {
+      method: "PUT",
+      headers: authHeaders(),
+      body: JSON.stringify({ status })
+    });
+    await loadOrders();
+  } catch (err) {
+    alert(err.message || "Status yangilanmadi.");
   }
-  await loadOrders();
 }
 
 async function loadMenuList() {
-  const res = await fetch("/menu");
-  const items = await res.json();
+  const items = await requestJSON("/menu");
   const wrap = document.getElementById("menuListWrap");
   if (!items.length) {
     wrap.innerHTML = "<p class='muted'>Menu bo'sh.</p>";
@@ -144,11 +149,12 @@ async function loadMenuList() {
 }
 
 async function loadOrders() {
-  const res = await fetch("/orders", { headers: authHeaders() });
-  const orders = await res.json();
   const wrap = document.getElementById("ordersWrap");
-  if (!res.ok) {
-    wrap.textContent = orders.message || "Orders yuklanmadi.";
+  let orders = [];
+  try {
+    orders = await requestJSON("/orders", { headers: authHeaders() });
+  } catch (err) {
+    wrap.textContent = err.message || "Orders yuklanmadi.";
     return;
   }
   if (!orders.length) {
@@ -179,11 +185,12 @@ async function loadOrders() {
 }
 
 async function loadTopItems() {
-  const res = await fetch("/admin/top-items", { headers: authHeaders() });
-  const data = await res.json();
   const wrap = document.getElementById("topItemsWrap");
-  if (!res.ok) {
-    wrap.textContent = data.message || "Top items yuklanmadi.";
+  let data = [];
+  try {
+    data = await requestJSON("/admin/top-items", { headers: authHeaders() });
+  } catch (err) {
+    wrap.textContent = err.message || "Top items yuklanmadi.";
     return;
   }
   if (!data.length) {
@@ -194,11 +201,12 @@ async function loadTopItems() {
 }
 
 async function loadStats() {
-  const res = await fetch("/admin/stats", { headers: authHeaders() });
-  const data = await res.json();
   const wrap = document.getElementById("statsWrap");
-  if (!res.ok) {
-    wrap.textContent = data.message || "Statistika yuklanmadi.";
+  let data;
+  try {
+    data = await requestJSON("/admin/stats", { headers: authHeaders() });
+  } catch (err) {
+    wrap.textContent = err.message || "Statistika yuklanmadi.";
     return;
   }
   wrap.innerHTML = `
@@ -208,11 +216,12 @@ async function loadStats() {
 }
 
 async function loadFeedback() {
-  const res = await fetch("/admin/feedback", { headers: authHeaders() });
-  const data = await res.json();
   const wrap = document.getElementById("feedbackWrap");
-  if (!res.ok) {
-    wrap.textContent = data.message || "Feedback yuklanmadi.";
+  let data = [];
+  try {
+    data = await requestJSON("/admin/feedback", { headers: authHeaders() });
+  } catch (err) {
+    wrap.textContent = err.message || "Feedback yuklanmadi.";
     return;
   }
   if (!data.length) {
@@ -246,9 +255,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!adminToken) return;
   try {
-    const res = await fetch("/profile", { headers: { Authorization: `Bearer ${adminToken}` } });
-    const profile = await res.json();
-    if (!res.ok || profile.role !== "admin") return;
+    const profile = await requestJSON("/profile", { headers: { Authorization: `Bearer ${adminToken}` } });
+    if (profile.role !== "admin") return;
     document.getElementById("adminLoginCard").style.display = "none";
     document.getElementById("adminApp").style.display = "block";
     await loadAllAdminData();
