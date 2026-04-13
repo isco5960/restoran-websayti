@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-wrap">
+      <a class="logo" href="/">RESTORAN ADMIN</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a class="active" href="/admin.html">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="container">
+      <h1 class="section-title">Admin boshqaruv paneli</h1>
+
+      <div class="card" id="adminLoginCard">
+        <h3>Admin login</h3>
+        <p class="muted">Default: +998900000001 / Admin123!</p>
+        <div class="field"><label>Phone</label><input id="adminPhone" value="+998900000001" /></div>
+        <div class="field"><label>Password</label><input id="adminPassword" type="password" value="Admin123!" /></div>
+        <button class="btn btn-primary" id="adminLoginBtn">Kirish</button>
+        <p id="adminLoginMsg" class="muted" style="margin-top:10px;"></p>
+      </div>
+
+      <div id="adminApp" style="display:none;">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Menu boshqaruvi</h3>
+            <div class="field"><label>Name</label><input id="mName" /></div>
+            <div class="field"><label>Price</label><input id="mPrice" type="number" /></div>
+            <div class="field">
+              <label>Category</label>
+              <select id="mCategory">
+                <option>Burger</option>
+                <option>Pizza</option>
+                <option>Ichimlik</option>
+                <option>Desert</option>
+              </select>
+            </div>
+            <div class="field"><label>Image URL</label><input id="mImage" /></div>
+            <div class="field"><label>Description</label><input id="mDesc" /></div>
+            <button class="btn btn-primary" id="addMenuBtn">Menu qo'shish</button>
+            <p id="menuMsg" class="muted" style="margin-top:10px;"></p>
+          </div>
+
+          <div class="card">
+            <h3>Kunlik statistika</h3>
+            <div id="statsWrap" class="muted">Ma'lumot yuklanmoqda...</div>
+            <br />
+            <h3>Top sotilgan taomlar</h3>
+            <div id="topItemsWrap" class="muted">Ma'lumot yuklanmoqda...</div>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="card">
+          <h3>Menyu ro'yxati</h3>
+          <div id="menuListWrap" class="muted">Yuklanmoqda...</div>
+        </div>
+
+        <br />
+
+        <div class="card">
+          <h3>Buyurtmalar</h3>
+          <div id="ordersWrap" class="muted">Yuklanmoqda...</div>
+        </div>
+
+        <br />
+
+        <div class="card">
+          <h3>Mijoz feedback (chat history)</h3>
+          <div id="feedbackWrap" class="muted">Yuklanmoqda...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

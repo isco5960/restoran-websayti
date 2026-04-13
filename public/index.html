@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restoran - Home</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-wrap">
+      <a class="logo" href="/">RESTORAN</a>
+      <div class="nav-links">
+        <a class="active" href="/">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/admin.html">Admin</a>
+        <a href="/cart.html">Cart (<span class="cart-count">0</span>)</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <h1>Onlayn buyurtma qiling</h1>
+      <p>15-30 daqiqada yetkazib berish, QulayPay bilan xavfsiz online to'lov va har kuni yangilanadigan menyu.</p>
+      <a class="btn btn-primary" href="/menu.html">Buyurtma berish</a>
+      <a class="btn btn-dark" href="/contact.html">Restoranda bron qiling</a>
+      <div class="benefits">
+        <div class="benefit">🚀 Tez yetkazish</div>
+        <div class="benefit">💳 Online to'lov (QulayPay)</div>
+        <div class="benefit">🍽 Yangi menyu</div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">🔥 Most popular today</h2>
+      <p class="muted">Hozir 12 kishi buyurtma bermoqda</p>
+      <div id="topMenu" class="grid-3"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Special offers</h2>
+      <div class="grid-3">
+        <div class="card"><h3>💸 Combo offers</h3><p class="muted">2 Burger + 2 Ichimlik = -20%</p></div>
+        <div class="card"><h3>2+1 free</h3><p class="muted">Limited time offer: 2 ta pizza olsangiz, 1 ta ichimlik bepul.</p></div>
+        <div class="card"><h3>⏱ 15-30 min delivery</h3><p class="muted">Eng tez yetkazish xizmati markaziy hududlar bo'yicha faol.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Reviews</h2>
+      <div class="grid-3">
+        <div class="card">"Juda mazali va tez yetkazib berish!" - Aziz</div>
+        <div class="card">"Chatbot orqali tez tanladim." - Malika</div>
+        <div class="card">"Narx va sifat zo'r." - Jamshid</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Location map</h2>
+      <div class="card">
+        <iframe title="map" src="https://maps.google.com/maps?q=tashkent&t=&z=11&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="container">© 2026 Restoran</div></footer>
+  <a href="/menu.html" class="btn btn-primary sticky-order-btn">Buyurtma berish</a>
+
+  <button class="chat-toggle" id="chatToggle">💬</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-head">Ask anything <button id="chatClose" class="btn btn-dark">x</button></div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Savol yozing..." />
+      <button id="chatSend" class="btn btn-primary">Send</button>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/home.js"></script>
+</body>
+</html>

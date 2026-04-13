@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar"><div class="container nav-wrap">
+    <a class="logo" href="/">RESTORAN</a>
+    <div class="nav-links">
+      <a href="/">Home</a><a href="/menu.html">Menu</a><a href="/cart.html">Cart</a>
+      <a class="active" href="/checkout.html">Checkout</a>
+    </div>
+  </div></nav>
+
+  <section>
+    <div class="container">
+      <h1 class="section-title">Checkout Page</h1>
+      <div class="grid-2">
+        <div class="card">
+          <div class="field"><label>Telefon raqam</label><input id="phone" /></div>
+          <div class="field"><label>Manzil</label><input id="address" /></div>
+          <div class="field">
+            <label>Yetkazish vaqti</label>
+            <select id="deliveryTime">
+              <option value="15-30 min">15-30 min</option>
+              <option value="30-45 min">30-45 min</option>
+              <option value="45-60 min">45-60 min</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>To'lov usuli (faqat online)</label>
+            <select id="paymentProvider">
+              <option value="click">Click</option>
+              <option value="payme">Payme</option>
+            </select>
+          </div>
+          <p class="muted">QulayPay integration faol. Confirm order bosilganda to'lov sahifasi ochiladi.</p>
+          <button id="confirmBtn" class="btn btn-primary">Confirm order</button>
+        </div>
+        <div class="card">
+          <h3>Order summary</h3>
+          <div id="checkoutItems"></div>
+          <br />
+          <div>Total: <strong id="checkoutTotal">0</strong> so'm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button class="chat-toggle" id="chatToggle">💬</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-head">Ask anything <button id="chatClose" class="btn btn-dark">x</button></div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input"><input id="chatInput" /><button id="chatSend" class="btn btn-primary">Send</button></div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

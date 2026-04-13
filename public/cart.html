@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar"><div class="container nav-wrap">
+    <a class="logo" href="/">RESTORAN</a>
+    <div class="nav-links">
+      <a href="/">Home</a><a href="/menu.html">Menu</a>
+      <a class="active" href="/cart.html">Cart (<span class="cart-count">0</span>)</a>
+    </div>
+  </div></nav>
+
+  <section>
+    <div class="container">
+      <h1 class="section-title">Cart Page</h1>
+      <div class="card">
+        <div id="cartItems"></div>
+        <div class="field">
+          <label>Yetkazish turi</label>
+          <select id="deliveryType">
+            <option value="delivery">Delivery</option>
+            <option value="pickup">Pickup</option>
+          </select>
+        </div>
+        <div class="field"><label>Promo code</label><input id="promoInput" placeholder="PROMO10" /></div>
+        <div class="total-box">
+          <div>Yetkazish: <strong id="deliveryPrice">15,000</strong> so'm</div>
+          <div>Total: <strong id="totalPrice">0</strong> so'm</div>
+        </div>
+        <br />
+        <a class="btn btn-success" href="/checkout.html">💳 To'lovga o'tish</a>
+      </div>
+    </div>
+  </section>
+
+  <button class="chat-toggle" id="chatToggle">💬</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-head">Ask anything <button id="chatClose" class="btn btn-dark">x</button></div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input"><input id="chatInput" /><button id="chatSend" class="btn btn-primary">Send</button></div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>

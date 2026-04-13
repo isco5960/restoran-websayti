@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar"><div class="container nav-wrap">
+    <a class="logo" href="/">RESTORAN</a>
+    <div class="nav-links">
+      <a href="/">Home</a><a class="active" href="/menu.html">Menu</a>
+      <a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/admin.html">Admin</a>
+      <a href="/cart.html">Cart (<span class="cart-count">0</span>)</a>
+    </div>
+  </div></nav>
+
+  <section>
+    <div class="container">
+      <h1 class="section-title">Menu Page</h1>
+      <div class="nav-links" style="margin-bottom: 16px;">
+        <a href="#" data-cat="Burger" class="active cat">Burger 🍔</a>
+        <a href="#" data-cat="Pizza" class="cat">Pizza 🍕</a>
+        <a href="#" data-cat="Ichimlik" class="cat">Ichimlik 🥤</a>
+        <a href="#" data-cat="Desert" class="cat">Desert 🍰</a>
+      </div>
+      <div class="filters">
+        <button class="active filter-btn" data-filter="popular">Eng mashhur</button>
+        <button class="filter-btn" data-filter="cheap">Arzon</button>
+        <button class="filter-btn" data-filter="new">Yangi</button>
+      </div>
+      <div id="menuGrid" class="grid-3"></div>
+    </div>
+  </section>
+
+  <footer><div class="container">© 2026 Restoran</div></footer>
+  <button class="chat-toggle" id="chatToggle">💬</button>
+  <div class="chat-box" id="chatBox">
+    <div class="chat-head">Ask anything <button id="chatClose" class="btn btn-dark">x</button></div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input"><input id="chatInput" /><button id="chatSend" class="btn btn-primary">Send</button></div>
+  </div>
+  <script src="/js/common.js"></script>
+  <script src="/js/menu.js"></script>
+</body>
+</html>
