@@ -1,3 +1,6 @@
 node_modules
 .env
 tools
+
+__pycache__/
+*.pyc
