@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: restoran-websayti
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: JWT_SECRET
+        sync: false
+      - key: QULAYPAY_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
